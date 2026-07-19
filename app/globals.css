@@ -18,7 +18,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme]) {
     --bg-primary: #02060f;
     --bg-panel: rgba(7, 17, 31, 0.88);
     --bg-card: rgba(9, 23, 43, 0.95);
@@ -34,6 +34,28 @@
     --shadow: 0 30px 90px rgba(0, 0, 0, 0.35);
     --panel-shadow: 0 24px 70px rgba(0, 0, 0, 0.4);
   }
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg-primary: #02060f;
+  --bg-panel: rgba(7, 17, 31, 0.88);
+  --bg-card: rgba(9, 23, 43, 0.95);
+  --border: rgba(78, 130, 255, 0.28);
+  --text-primary: #e7f0ff;
+  --text-secondary: #a8c9ff;
+  --surface: #07111f;
+  --input-bg: rgba(10, 22, 41, 0.92);
+  --input-border: rgba(86, 126, 255, 0.28);
+  --button-start: #2f79dc;
+  --button-end: #0f3f87;
+  --button-text: #f7fbff;
+  --shadow: 0 30px 90px rgba(0, 0, 0, 0.35);
+  --panel-shadow: 0 24px 70px rgba(0, 0, 0, 0.4);
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
 }
 
 * {
@@ -83,6 +105,25 @@ main {
   backdrop-filter: blur(24px);
   box-shadow: var(--panel-shadow);
   overflow: hidden;
+}
+
+.theme-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  padding: 18px 28px 0;
+}
+
+.theme-toggle {
+  width: auto;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  box-shadow: none;
+}
+
+.theme-toggle:hover {
+  box-shadow: 0 8px 20px rgba(47, 126, 255, 0.16);
 }
 
 .hero {
@@ -173,6 +214,10 @@ button:disabled {
   .hero {
     gap: 14px;
     padding: 18px;
+  }
+
+  .theme-toolbar {
+    padding: 14px 18px 0;
   }
 
   .card {

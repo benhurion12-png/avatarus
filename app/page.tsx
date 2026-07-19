@@ -3,6 +3,8 @@
 import dynamic from 'next/dynamic';
 import { useEffect, useMemo, useState } from 'react';
 
+type Theme = 'light' | 'dark';
+
 const AvatarScene = dynamic(() => import('@/components/AvatarScene'), { ssr: false });
 
 export default function Home() {
@@ -14,8 +16,28 @@ export default function Home() {
   const [speechPulse, setSpeechPulse] = useState(0);
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
   const [voiceIndex, setVoiceIndex] = useState(0);
+  const [theme, setTheme] = useState<Theme>('light');
 
   const canRun = useMemo(() => typeof window !== 'undefined' && 'speechSynthesis' in window, []);
+
+  useEffect(() => {
+    const savedTheme = window.localStorage.getItem('theme');
+    const initialTheme: Theme = savedTheme === 'light' || savedTheme === 'dark'
+      ? savedTheme
+      : window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? 'dark'
+      : 'light';
+
+    setTheme(initialTheme);
+    document.documentElement.dataset.theme = initialTheme;
+  }, []);
+
+  const toggleTheme = () => {
+    const nextTheme: Theme = theme === 'light' ? 'dark' : 'light';
+    setTheme(nextTheme);
+    document.documentElement.dataset.theme = nextTheme;
+    window.localStorage.setItem('theme', nextTheme);
+  };
 
   useEffect(() => {
     if (!canRun) {
@@ -80,6 +102,11 @@ export default function Home() {
   return (
     <main>
       <div className="panel">
+        <div className="theme-toolbar">
+          <button className="theme-toggle" type="button" onClick={toggleTheme} aria-label="Переключить цветовую тему">
+            {theme === 'light' ? '🌙 Тёмная тема' : '☀️ Светлая тема'}
+          </button>
+        </div>
         <div className="hero">
           <section className="card">
             <h1 style={{ marginTop: 0 }}>AI Avatar speaking VRM</h1>
