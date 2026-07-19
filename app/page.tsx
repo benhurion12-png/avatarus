@@ -104,7 +104,7 @@ export default function Home() {
                 <select value={voiceIndex} onChange={(e) => setVoiceIndex(Number(e.target.value))}>
                   {voices.map((voice, index) => (
                     <option key={`${voice.name}-${index}`} value={index}>
-                      {voice.name} ({voice.lang}) {voice.gender ? `- ${voice.gender}` : ''}
+                      {voice.name} ({voice.lang})
                     </option>
                   ))}
                 </select>
