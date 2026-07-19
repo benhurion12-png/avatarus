@@ -109,9 +109,9 @@ export default function Home() {
         </div>
         <div className="hero">
           <section className="card">
-            <h1 style={{ marginTop: 0 }}>AI Avatar speaking VRM</h1>
+            <h1 style={{ marginTop: 0 }}>Примерный проект для ИСУ-25. Мы с Лехой, мы с Лехой</h1>
             <p style={{ color: '#b8c2d9', lineHeight: 1.6 }}>
-              Этот проект загружает VRM-голову из папки проекта и позволяет ей отвечать на вопросы с помощью бесплатного LLM и браузерного TTS.
+              Тут VRM голова от Дмитрия Алешина, найдите его в 211, 2 корпус
             </p>
             <textarea
               rows={5}
